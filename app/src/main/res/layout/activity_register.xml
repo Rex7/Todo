@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Register">
+    <EditText
+        android:id="@+id/Name"
+        android:layout_centerHorizontal="true"
+        android:hint="@string/name"
+        android:layout_marginTop="40dp"
+        android:gravity="center"
+        android:layout_width="320dp"
+        android:layout_height="80dp" />
+    <EditText
+        android:id="@+id/emailId_register"
+        android:layout_centerHorizontal="true"
+        android:hint="@string/email"
+        android:gravity="center"
+        android:layout_below="@+id/Name"
+        android:layout_width="320dp"
+        android:layout_height="80dp" />
+    <EditText
+        android:id="@+id/password_register"
+        android:layout_centerHorizontal="true"
+        android:hint="@string/password"
+        android:layout_below="@+id/emailId_register"
+        android:gravity="center"
+        android:layout_width="320dp"
+        android:layout_height="80dp" />
+    <EditText
+        android:id="@+id/confirmPassword_register"
+        android:layout_centerHorizontal="true"
+        android:hint="@string/confirm_password"
+        android:gravity="center"
+        android:layout_below="@+id/password_register"
+        android:layout_width="320dp"
+        android:layout_height="80dp" />
+
+    <Button
+        android:id="@+id/register"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:hint="@string/register"
+        android:layout_marginTop="40dp"
+        android:layout_below="@+id/confirmPassword_register"/>
+
+</RelativeLayout>

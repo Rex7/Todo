@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">SomeTodo</string>
+    <string name="email">Email Address</string>
+    <string name="password">password</string>
+    <string name="login">Login</string>
+    <string name="name">Name</string>
+    <string name="confirm_password">Confirm password</string>
+    <string name="register">Register</string>
+    <string name="title_activity_todo">Todo</string>
+    <string name="action_settings">Settings</string>
+    <string name="logout">Logout</string>
+    <string name="profile">Profile</string>
+    <string name="report">Report</string>
+    <string name="open_navigation">opne</string>
+    <string name="close_navigation">close</string>
+    <string name="finished">Finised</string>
+    <string name="task">enter task</string>
+    <string name="title_activity_main">MainActivity</string>
+
+</resources>
