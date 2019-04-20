@@ -10,6 +10,9 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 
 import android.support.v4.app.Fragment;
@@ -46,6 +49,9 @@ public class Todo extends AppCompatActivity implements NavigationView.OnNavigati
     private DrawerLayout drawerLayout;
     DatePicker datePicker;
     SessionManage sessionManage;
+    RecyclerView recyclerView;
+    ArrayList<Task> getAllTask;
+    RecyclerViewAdapterMain recyclerViewAdapterMain;
     private ActionBarDrawerToggle actionBarDrawerToggle;
 
     @Override
@@ -55,12 +61,16 @@ public class Todo extends AppCompatActivity implements NavigationView.OnNavigati
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         sessionManage= new SessionManage(getApplicationContext());
+
+
+
         FloatingActionButton fab =  findViewById(R.id.fab);
+
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 FragmentManager fragmentManager=getSupportFragmentManager();
-                DailogFragment dailogFragment=new DailogFragment();
+                DailogFragment dailogFragment=new DailogFragment(getApplicationContext(),sessionManage);
                 dailogFragment.show(fragmentManager,"dialog");
                 Toast.makeText(getApplicationContext(),"hello ",Toast.LENGTH_LONG).show();
 

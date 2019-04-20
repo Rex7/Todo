@@ -52,7 +52,9 @@ Button login;
            status= helper.checkUser(emailAddress.getText().toString().trim(),password.getText().toString().trim());
            if(status.equals("success")){
                startActivity(new Intent(getApplicationContext(),Todo.class));
-               sessionManage.createSession( password.getText().toString(),emailAddress.getText().toString());
+               String username=helper.getUserName(emailAddress.getText().toString(),password.getText().toString());
+               sessionManage.createSession( password.getText().toString(),emailAddress.getText().toString(),username);
+
            }
            else {
                Toast.makeText(getApplicationContext(),"Login failed "+status,Toast.LENGTH_LONG).show();

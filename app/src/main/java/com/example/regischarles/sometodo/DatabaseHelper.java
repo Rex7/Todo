@@ -7,16 +7,19 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import java.util.ArrayList;
+
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static  String database_Name="todo.db";
-    String table_Name="UserTodo";
-    String name="Name";
-    String email="Email";
-    String password="password";
-    String date ="assignedDate";
-    String query=" DROP TABLE IF EXISTS " +table_Name;
-    String sqlQuery="CREATE TABLE  " + table_Name + "(\n" +
+   private String table_Name="UserTodo";
+   private String name="Name";
+   private String email="Email";
+   private String password="password";
+   private String date ="assignedDate";
+
+   private String query=" DROP TABLE IF EXISTS " +table_Name;
+  private  String sqlQuery="CREATE TABLE  " + table_Name + "(\n" +
             "\t`UserId`\tINTEGER PRIMARY KEY AUTOINCREMENT,\n" +
             "\t" + name + "\tTEXT NOT NULL,\n" +
             "\t" + email + "\tTEXT NOT NULL,\n" +
@@ -24,6 +27,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             "\t" + password + "\tTEXT NOT NULL\n" +
 
             ");";
+   private  String taskCreate="CREATE TABLE \"task\" (\n" +
+            "\t\"username\"\tTEXT,\n" +
+            "\t\"task\"\tTEXT NOT NULL,\n" +
+            "\t\"status\"\tTEXT NOT NULL\n" +
+            ")";
     public DatabaseHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, database_Name, factory, version);
     }
@@ -41,9 +49,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     }
     public String checkUser(String emailId,String pass){
-        String status="failure";
+
         SQLiteDatabase db=getWritableDatabase();
-        String[] selectionArgs = new String[]{emailId.trim(), pass.trim()};
+        Cursor cursor = null;
         try
         {
             int i;
@@ -51,7 +59,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
           db.rawQuery("select * from " + table_Name + " where `" + email + "` =  '"+emailId+"' and   `" + password+
                     "` = '"+pass+"'",null);
-            Cursor cursor=   db.query(table_Name, new String[] { "Name", "Email", "password"},
+           cursor=  db.query(table_Name, new String[] { "Name", "Email", "password"},
                     "Email like '" + emailId.trim() + "' AND " + "password like '" + pass.trim()+"'", null, null, null, null);
 
             i = cursor.getCount();
@@ -65,6 +73,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         {
             Log.v("ExceptionData",e.getMessage());
         }
+        finally {
+            cursor.close();
+
+        }
         return "failure";
 
 
@@ -73,9 +85,53 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
     }
+    public long addTask(Task task){
+        SQLiteDatabase database=getWritableDatabase();
+        ContentValues contentValues=new ContentValues();
+        contentValues.put("username",task.getUsername());
+        contentValues.put("task",task.getTask());
+        contentValues.put("status",task.getStatus());
+        long val =database.insert("task",null,contentValues);
+        Log.v("UniqueTag ","addTask "+val);
+
+        return val;
+    }
+    public ArrayList<Task> getAllRecord(SessionManage sessionManage){
+        ArrayList<Task> taskList =new ArrayList<>();
+    Cursor cursor=getReadableDatabase().rawQuery("select * from  task where username = '" +sessionManage.getUsername()+"'" ,null);
+    Log.v("UniqueTag","Count in ArrayList "+cursor.getCount());
+    if(cursor.getCount()>0){
+        while (cursor.moveToNext()){
+            String task=cursor.getString(cursor.getColumnIndex("task"));
+            String status=cursor.getString(cursor.getColumnIndex("status"));
+            String username=cursor.getString(cursor.getColumnIndex("username"));
+         taskList.add(new Task(task,status,username));
+        }
+    }
+    Log.v("UniqueTag","count "+taskList.size());
+    return  taskList;
+    }
+    public String getUserName(String email ,String password){
+        Log.v("UniqueTag","email "+email+"password "+password);
+        String username = "";
+      try{
+          Cursor cursor=getWritableDatabase().rawQuery("SELECT Name from UserTodo\n" +
+                  "where password ='9821' and Email=\"rex@gmail.com\"",null);
+          cursor.moveToFirst();
+          username=cursor.getString(0);
+          Log.v("UniqueTag","Count of user "+cursor.getCount()+"name "+cursor.getString(0));
+
+      }
+      catch (Exception ex){
+          Log.v("UniqueTag"," messag bbbb b \\"+ex.getMessage());
+      }
+
+      return username;
+    }
     @Override
     public void onCreate(SQLiteDatabase db) {
    db.execSQL(sqlQuery);
+   db.execSQL(taskCreate);
         Log.d("databasehelper", "onCreate: ");
     }
 
