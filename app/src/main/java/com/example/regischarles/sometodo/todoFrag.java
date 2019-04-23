@@ -5,12 +5,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
-
-import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -19,8 +14,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -38,10 +31,19 @@ public class todoFrag extends Fragment {
     }
     Button button;
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        sessionManage= new SessionManage(context);
+        DatabaseHelper helper=new DatabaseHelper(context,null,null,3);
+        getAllTask= helper.getAllRecord(sessionManage);
+        recyclerViewAdapterMain =new RecyclerViewAdapterMain(context,getAllTask);
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        sessionManage= new SessionManage(context);
+
 
         View view= inflater.inflate(R.layout.fragment_todo,container,false);
 
@@ -51,9 +53,8 @@ public class todoFrag extends Fragment {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
 
-        DatabaseHelper helper=new DatabaseHelper(context,null,null,3);
-        getAllTask= helper.getAllRecord(sessionManage);
-       recyclerViewAdapterMain =new RecyclerViewAdapterMain(context,getAllTask);
+
+
       recyclerView.setAdapter(recyclerViewAdapterMain);
 
 
@@ -64,5 +65,21 @@ public class todoFrag extends Fragment {
 
 
         return  view;
+    }
+    public void refreshData(){
+       try{
+        int count=   recyclerViewAdapterMain.getItemCount();
+        DatabaseHelper helper=new DatabaseHelper(context,null,null,3);
+
+       RecyclerViewAdapterMain recycler=new RecyclerViewAdapterMain(context,helper.getAllRecord(sessionManage));
+       recyclerView.setAdapter(recycler);
+        recycler.notifyDataSetChanged();
+           Log.v("refreshDataMethod","couny "+count+"size of array "+recycler.taskArrayList.size());
+       }catch (Exception ex){
+Log.v("refreshDataMethod"," "+ex.getMessage());
+       }
+
+
+
     }
 }

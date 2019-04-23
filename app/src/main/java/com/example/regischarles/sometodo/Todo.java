@@ -50,9 +50,10 @@ public class Todo extends AppCompatActivity implements NavigationView.OnNavigati
     DatePicker datePicker;
     SessionManage sessionManage;
     RecyclerView recyclerView;
-    ArrayList<Task> getAllTask;
-    RecyclerViewAdapterMain recyclerViewAdapterMain;
+
+
     private ActionBarDrawerToggle actionBarDrawerToggle;
+   public ViewPagerAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +74,8 @@ public class Todo extends AppCompatActivity implements NavigationView.OnNavigati
                 DailogFragment dailogFragment=new DailogFragment(getApplicationContext(),sessionManage);
                 dailogFragment.show(fragmentManager,"dialog");
                 Toast.makeText(getApplicationContext(),"hello ",Toast.LENGTH_LONG).show();
+
+
 
                 Snackbar.make(view, "Adding a new task...please wait", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
@@ -120,6 +123,15 @@ public class Todo extends AppCompatActivity implements NavigationView.OnNavigati
     }
 
     @Override
+    public void onAttachFragment(Fragment fragment) {
+        super.onAttachFragment(fragment);
+
+
+
+
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
@@ -143,7 +155,7 @@ public class Todo extends AppCompatActivity implements NavigationView.OnNavigati
         return super.onOptionsItemSelected(item);
     }
     private void setupViewPager(ViewPager viewPager) {
-        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new todoFrag(this), "TO Do ");
         adapter.addFragment(new finisedFrag(this), "Finised");
 

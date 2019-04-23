@@ -42,7 +42,10 @@ this.context=context;
                 task.setStatus("added");
                 task.setUsername(sessionManage.getUsername());
               long count=  helper.addTask(task);
+
               Log.v("MyDataPlus","Count "+count);
+         todoFrag frag= (todoFrag) getFragmentManager().getFragments().get(0);
+                frag.refreshData();
 
 
 
