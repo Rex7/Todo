@@ -47,7 +47,7 @@ public class Todo extends AppCompatActivity implements NavigationView.OnNavigati
     private TabLayout tabLayout;
     private NavigationView navigationView;
     private DrawerLayout drawerLayout;
-    DatePicker datePicker;
+
     SessionManage sessionManage;
     RecyclerView recyclerView;
 

@@ -100,6 +100,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         ArrayList<Task> taskList =new ArrayList<>();
     Cursor cursor=getReadableDatabase().rawQuery("select * from  task where username = '" +sessionManage.getUsername()+"'" ,null);
     Log.v("UniqueTag","Count in ArrayList "+cursor.getCount());
+        Log.v("UniqueTag","Username in ArrayList "+sessionManage.getUsername());
     if(cursor.getCount()>0){
         while (cursor.moveToNext()){
             String task=cursor.getString(cursor.getColumnIndex("task"));
@@ -108,6 +109,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
          taskList.add(new Task(task,status,username));
         }
     }
+    cursor.close();
     Log.v("UniqueTag","count "+taskList.size());
     return  taskList;
     }
@@ -115,8 +117,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Log.v("UniqueTag","email "+email+"password "+password);
         String username = "";
       try{
-          Cursor cursor=getWritableDatabase().rawQuery("SELECT Name from UserTodo\n" +
-                  "where password ='9821' and Email=\"rex@gmail.com\"",null);
+          Cursor cursor=getWritableDatabase().rawQuery("SELECT Name from UserTodo where password = "+password +"  and Email='"+ email+"'",null);
           cursor.moveToFirst();
           username=cursor.getString(0);
           Log.v("UniqueTag","Count of user "+cursor.getCount()+"name "+cursor.getString(0));
