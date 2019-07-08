@@ -13,8 +13,9 @@
     <string name="report">Report</string>
     <string name="open_navigation">opne</string>
     <string name="close_navigation">close</string>
-    <string name="finished">Finised</string>
+    <string name="finished">Finished</string>
     <string name="task">enter task</string>
     <string name="title_activity_main">MainActivity</string>
+
 
 </resources>

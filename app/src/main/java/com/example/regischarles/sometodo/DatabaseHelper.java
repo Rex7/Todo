@@ -30,10 +30,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
    private  String taskCreate="CREATE TABLE \"task\" (\n" +
             "\t\"username\"\tTEXT,\n" +
             "\t\"task\"\tTEXT NOT NULL,\n" +
-            "\t\"status\"\tTEXT NOT NULL\n" +
+            "\t\"status\"\tTEXT NOT NULL,\n" +
+           "\t`TaskId`\tINTEGER PRIMARY KEY AUTOINCREMENT\n" +
             ")";
     public DatabaseHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
-        super(context, database_Name, factory, version);
+        super(context, database_Name, factory, 4);
     }
     public long registerUser(User reg){
         SQLiteDatabase database=getWritableDatabase();

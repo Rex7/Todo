@@ -46,7 +46,7 @@ Button login;
     @Override
     public void onClick(View v) {
         String status;
-        helper=new DatabaseHelper(getApplicationContext(),null,null,3);
+        helper=new DatabaseHelper(getApplicationContext(),null,null,4);
         if(emailAddress.getText()!=null && password.getText()!=null){
 
            status= helper.checkUser(emailAddress.getText().toString().trim(),password.getText().toString().trim());

@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
     <android.support.v7.widget.CardView
+
         android:id="@+id/cardview"
+        app:cardUseCompatPadding="true"
+        app:cardElevation="2dp"
         android:layout_width="match_parent"
         android:layout_height="100dp">
         <RelativeLayout
@@ -17,7 +23,7 @@
 
         <Button
             android:id="@+id/finished"
-            android:text="Finished"
+            android:text="@string/finished"
             android:layout_below="@+id/taskImp"
             android:layout_alignParentRight="true"
 

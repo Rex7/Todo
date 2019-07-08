@@ -36,7 +36,7 @@ this.context=context;
             @Override
             public void onClick(View v) {
                 Log.v("MyDataPlus",inputTask.getText().toString());
-                DatabaseHelper helper=new DatabaseHelper(context,null,null,3);
+                DatabaseHelper helper=new DatabaseHelper(context,null,null,4);
                 Task task=new Task();
                 task.setTask(inputTask.getText().toString().trim());
                 task.setStatus("added");

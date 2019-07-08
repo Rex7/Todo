@@ -4,32 +4,42 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/gradient"
     tools:context=".LoginActivity">
+
 
   <EditText
       android:id="@+id/emailId"
       android:layout_width="320dp"
       android:layout_height="80dp"
-      android:layout_marginTop="50dp"
-      android:hint="@string/email"
+      android:layout_centerHorizontal="true"
+      android:layout_marginTop="150dp"
       android:gravity="center"
-      android:layout_centerHorizontal="true"/>
-    <EditText
-        android:id="@+id/password"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/emailId"
-        android:hint="@string/password"
-        android:gravity="center"
-        android:layout_marginTop="20dp"
-        android:layout_width="320dp"
-        android:layout_height="80dp" />
-    <Button
-        android:id="@+id/login"
-        android:text="@string/login"
-        android:layout_below="@+id/password"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+      android:hint="@string/email"
+      android:inputType="textEmailAddress"
+      android:textColorHint="#cc1a1a"  />
+
+  <EditText
+      android:id="@+id/password"
+      android:layout_width="320dp"
+      android:layout_height="80dp"
+      android:layout_below="@+id/emailId"
+      android:layout_centerHorizontal="true"
+      android:layout_marginTop="27dp"
+      android:gravity="center"
+      android:hint="@string/password"
+      android:inputType="textPassword"
+      android:textColorHint="#cc1a1a" />
+
+  <Button
+      android:id="@+id/login"
+      android:layout_width="150dp"
+      android:layout_height="wrap_content"
+      android:layout_below="@+id/password"
+      android:layout_centerHorizontal="true"
+      android:layout_marginTop="40dp"
+      android:background="@drawable/rounded_button"
+      android:text="@string/login"
+      android:textColor="#efecec" />
 
 </RelativeLayout>

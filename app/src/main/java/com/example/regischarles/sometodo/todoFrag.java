@@ -18,7 +18,7 @@ import android.widget.Button;
 import java.util.ArrayList;
 
 @SuppressLint("ValidFragment")
-public class todoFrag extends Fragment {
+public class  todoFrag extends Fragment  {
     Context context;
     RecyclerView recyclerView;
     SessionManage sessionManage;
@@ -35,7 +35,7 @@ public class todoFrag extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         sessionManage= new SessionManage(context);
-        DatabaseHelper helper=new DatabaseHelper(context,null,null,3);
+        DatabaseHelper helper=new DatabaseHelper(context,null,null,4);
         getAllTask= helper.getAllRecord(sessionManage);
         recyclerViewAdapterMain =new RecyclerViewAdapterMain(context,getAllTask);
     }
@@ -46,6 +46,7 @@ public class todoFrag extends Fragment {
 
 
         View view= inflater.inflate(R.layout.fragment_todo,container,false);
+
 
         recyclerView=view.findViewById(R.id.recyclerViewTodo);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
@@ -64,9 +65,11 @@ public class todoFrag extends Fragment {
 
 
 
+
         return  view;
     }
     public void refreshData(){
+        Log.v("UniqueTag","RefreshData() is called");
        try{
         int count=   recyclerViewAdapterMain.getItemCount();
         DatabaseHelper helper=new DatabaseHelper(context,null,null,3);
@@ -82,4 +85,6 @@ Log.v("refreshDataMethod"," "+ex.getMessage());
 
 
     }
+
+
 }
