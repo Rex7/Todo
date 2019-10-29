@@ -14,8 +14,10 @@
     <string name="open_navigation">opne</string>
     <string name="close_navigation">close</string>
     <string name="finished">Finished</string>
-    <string name="task">enter task</string>
+    <string name="task">Enter Todo</string>
     <string name="title_activity_main">MainActivity</string>
+    <string name="signup">Not a member ? Sign up  now.</string>
+    <string name="title_enter">Enter  Title</string>
 
 
 </resources>

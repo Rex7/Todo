@@ -4,8 +4,19 @@
     android:layout_width="match_parent"
     android:layout_height="350dp">
     <EditText
+        android:id="@+id/subject"
+        android:textColorHint="@color/colorAccent"
+        android:gravity="center_horizontal"
+        android:hint="@string/title_enter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <EditText
         android:id="@+id/dialogTask"
         android:hint="@string/task"
+        android:layout_marginTop="4dp"
+        android:textColorHint="@color/colorAccent"
+        android:gravity="center_horizontal"
+        android:layout_below="@+id/subject"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

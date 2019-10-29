@@ -1,11 +1,12 @@
 package com.example.regischarles.sometodo;
 
 public class Task {
-    private String task,status,username;
-    public Task(String task,String status,String username){
+    private String task,status,username,subject;
+    public Task(String subject,String task,String status,String username){
         this.setUsername(username);
         this.setStatus(status);
         this.setTask(task);
+        this.setSubject(subject);
     }
 public Task(){
 
@@ -33,5 +34,13 @@ public Task(){
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getSubject() {
+        return subject;
+    }
+
+    public void setSubject(String subject) {
+        this.subject = subject;
     }
 }

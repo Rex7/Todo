@@ -30,11 +30,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
    private  String taskCreate="CREATE TABLE \"task\" (\n" +
             "\t\"username\"\tTEXT,\n" +
             "\t\"task\"\tTEXT NOT NULL,\n" +
+           "\t\"subject\"\tTEXT NOT NULL,\n" +
+
             "\t\"status\"\tTEXT NOT NULL,\n" +
            "\t`TaskId`\tINTEGER PRIMARY KEY AUTOINCREMENT\n" +
             ")";
     public DatabaseHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
-        super(context, database_Name, factory, 4);
+        super(context, database_Name, factory, 5);
     }
     public long registerUser(User reg){
         SQLiteDatabase database=getWritableDatabase();
@@ -92,6 +94,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put("username",task.getUsername());
         contentValues.put("task",task.getTask());
         contentValues.put("status",task.getStatus());
+        contentValues.put("subject",task.getSubject());
         long val =database.insert("task",null,contentValues);
         Log.v("UniqueTag ","addTask "+val);
 
@@ -105,9 +108,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     if(cursor.getCount()>0){
         while (cursor.moveToNext()){
             String task=cursor.getString(cursor.getColumnIndex("task"));
+            String title=cursor.getString(cursor.getColumnIndex("subject"));
             String status=cursor.getString(cursor.getColumnIndex("status"));
             String username=cursor.getString(cursor.getColumnIndex("username"));
-         taskList.add(new Task(task,status,username));
+         taskList.add(new Task(title,task,status,username));
         }
     }
     cursor.close();

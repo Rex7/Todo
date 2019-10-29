@@ -66,4 +66,7 @@ Button login;
             Toast.makeText(getApplicationContext(),"enter email address and password ",Toast.LENGTH_LONG).show();
         }
     }
+    public void signUp(View v){
+        startActivity(new Intent(getApplicationContext(),Register.class));
+    }
 }

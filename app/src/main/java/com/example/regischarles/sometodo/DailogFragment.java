@@ -17,7 +17,7 @@ import android.widget.Toast;
 @SuppressLint("ValidFragment")
 public class DailogFragment extends DialogFragment {
     Button button;
-    EditText inputTask;
+    EditText inputTask,title;
     Context context;
     SessionManage sessionManage;
 @SuppressLint("ValidFragment")
@@ -32,6 +32,7 @@ this.context=context;
         View view=inflater.inflate(R.layout.dialog,container,false);
          button=view.findViewById(R.id.dailog_add_task);
          inputTask=view.findViewById(R.id.dialogTask);
+         title=view.findViewById(R.id.subject);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -40,6 +41,7 @@ this.context=context;
                 Task task=new Task();
                 task.setTask(inputTask.getText().toString().trim());
                 task.setStatus("added");
+                task.setSubject(title.getText().toString());
                 task.setUsername(sessionManage.getUsername());
               long count=  helper.addTask(task);
 

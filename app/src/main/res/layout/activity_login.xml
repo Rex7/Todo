@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gradient"
+
     tools:context=".LoginActivity">
 
 
@@ -13,7 +13,7 @@
       android:layout_width="320dp"
       android:layout_height="80dp"
       android:layout_centerHorizontal="true"
-      android:layout_marginTop="150dp"
+      android:layout_marginTop="100dp"
       android:gravity="center"
       android:hint="@string/email"
       android:inputType="textEmailAddress"
@@ -25,7 +25,7 @@
       android:layout_height="80dp"
       android:layout_below="@+id/emailId"
       android:layout_centerHorizontal="true"
-      android:layout_marginTop="27dp"
+      android:layout_marginTop="25dp"
       android:gravity="center"
       android:hint="@string/password"
       android:inputType="textPassword"
@@ -33,7 +33,7 @@
 
   <Button
       android:id="@+id/login"
-      android:layout_width="150dp"
+      android:layout_width="200dp"
       android:layout_height="wrap_content"
       android:layout_below="@+id/password"
       android:layout_centerHorizontal="true"
@@ -41,5 +41,18 @@
       android:background="@drawable/rounded_button"
       android:text="@string/login"
       android:textColor="#efecec" />
+  <TextView
+      android:id="@+id/signup_login"
+      android:layout_width="wrap_content"
+      android:layout_below="@+id/login"
+      android:layout_marginTop="30dp"
+      android:layout_centerHorizontal="true"
+      android:textSize="20sp"
+      android:textColor="#000"
+      android:background="?attr/selectableItemBackground"
+      android:clickable="true"
+      android:onClick="signUp"
+      android:text="@string/signup"
+      android:layout_height="wrap_content" />
 
 </RelativeLayout>

@@ -70,6 +70,7 @@
         android:id="@+id/navView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        app:headerLayout="@layout/header"
         app:menu="@menu/menu_todo"
         android:layout_gravity="start">
 

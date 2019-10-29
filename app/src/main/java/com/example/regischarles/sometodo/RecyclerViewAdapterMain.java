@@ -32,6 +32,7 @@ this.ctx=ctx;
     @Override
     public void onBindViewHolder(@NonNull RecyclerViewHolder recyclerViewHolder, int position) {
        recyclerViewHolder.textView.setText(taskArrayList.get(position).getTask());
+       recyclerViewHolder.title.setText(taskArrayList.get(position).getSubject());
 
 
     }
@@ -43,6 +44,7 @@ this.ctx=ctx;
     }
     static  class RecyclerViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
        TextView textView;
+       TextView title;
        Button button;
        private Context mContext;
        private ArrayList<Task> tasks;
@@ -51,6 +53,7 @@ this.ctx=ctx;
         {
             super(itemView);
             textView=itemView.findViewById(R.id.taskImp);
+            title=itemView.findViewById(R.id.title_todo);
             button=itemView.findViewById(R.id.finished);
             button.setOnClickListener(this);
             this.mContext=mContext;
