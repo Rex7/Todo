@@ -54,6 +54,7 @@ Button login;
                startActivity(new Intent(getApplicationContext(),Todo.class));
                String username=helper.getUserName(emailAddress.getText().toString(),password.getText().toString());
                sessionManage.createSession( password.getText().toString(),emailAddress.getText().toString(),username);
+               finish();
 
            }
            else {
@@ -69,4 +70,5 @@ Button login;
     public void signUp(View v){
         startActivity(new Intent(getApplicationContext(),Register.class));
     }
+
 }

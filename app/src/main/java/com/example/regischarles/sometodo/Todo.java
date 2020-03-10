@@ -212,6 +212,12 @@ return true;
         super.onPostCreate(savedInstanceState);
         actionBarDrawerToggle.syncState();
     }
+
+    @Override
+    public void onBackPressed() {
+
+        finish();
+    }
 }
 
 

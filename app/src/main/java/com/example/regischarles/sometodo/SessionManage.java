@@ -53,9 +53,12 @@ public class SessionManage {
         editor.clear();
         editor.apply();
         Intent myIntent = new Intent(context, LoginActivity.class);
+        myIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         myIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(myIntent);
-    }
+
+
+            }
     public String getUsername(){
         return sharedPreferences.getString( NAME,null);
     }

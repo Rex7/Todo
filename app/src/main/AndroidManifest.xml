@@ -22,6 +22,7 @@
         <activity android:name=".Register" />
         <activity
             android:name=".Todo"
+            android:noHistory="true"
             android:label="@string/title_activity_todo"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Report" />
