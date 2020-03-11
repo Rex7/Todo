@@ -77,7 +77,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             Log.v("ExceptionData",e.getMessage());
         }
         finally {
-            cursor.close();
+            if(cursor!=null){
+                cursor.close();
+            }
 
         }
         return "failure";
@@ -100,6 +102,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         return val;
     }
+    public int updateTask(int position){
+        int count=0;
+        try {
+            Cursor cursor = getWritableDatabase().rawQuery("update task set status = ' finished ' where TaskId = " + position, null);
+             count = cursor.getCount();
+        }
+        catch (Exception ex){
+            Log.v("UniqueTag","exception"+ex.getMessage());
+        }
+        return count;
+    }
     public ArrayList<Task> getAllRecord(SessionManage sessionManage){
         ArrayList<Task> taskList =new ArrayList<>();
     Cursor cursor=getReadableDatabase().rawQuery("select * from  task where username = '" +sessionManage.getUsername()+"'" ,null);
@@ -111,12 +124,38 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             String title=cursor.getString(cursor.getColumnIndex("subject"));
             String status=cursor.getString(cursor.getColumnIndex("status"));
             String username=cursor.getString(cursor.getColumnIndex("username"));
-         taskList.add(new Task(title,task,status,username));
+            int taskId=cursor.getInt(cursor.getColumnIndex("TaskId"));
+            if(!status.trim().equals("finished")){
+                taskList.add(new Task(title,task,status,username,taskId));
+            }
+
         }
     }
     cursor.close();
-    Log.v("UniqueTag","count "+taskList.size());
+
     return  taskList;
+    }
+    public ArrayList<Task> getAllFinishedTask(SessionManage sessionManage){
+        ArrayList<Task> taskList =new ArrayList<>();
+        Cursor cursor=getReadableDatabase().rawQuery("select * from  task where username = '" +sessionManage.getUsername()+"'" ,null);
+        Log.v("UniqueTag","Count in ArrayList "+cursor.getCount());
+        Log.v("UniqueTag","Username in ArrayList "+sessionManage.getUsername());
+        if(cursor.getCount()>0){
+            while (cursor.moveToNext()){
+                String task=cursor.getString(cursor.getColumnIndex("task"));
+                String title=cursor.getString(cursor.getColumnIndex("subject"));
+                String status=cursor.getString(cursor.getColumnIndex("status"));
+                String username=cursor.getString(cursor.getColumnIndex("username"));
+                int taskId=cursor.getInt(cursor.getColumnIndex("TaskId"));
+                if(status.trim().equals("finished")){
+                    taskList.add(new Task(title,task,status,username,taskId));
+                }
+
+            }
+        }
+        cursor.close();
+
+        return  taskList;
     }
     public String getUserName(String email ,String password){
         Log.v("UniqueTag","email "+email+"password "+password);

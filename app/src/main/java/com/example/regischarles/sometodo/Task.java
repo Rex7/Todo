@@ -2,11 +2,22 @@ package com.example.regischarles.sometodo;
 
 public class Task {
     private String task,status,username,subject;
-    public Task(String subject,String task,String status,String username){
+
+    public int getTaskId() {
+        return taskId;
+    }
+
+    public void setTaskId(int taskId) {
+        this.taskId = taskId;
+    }
+
+    private int taskId;
+    public Task(String subject,String task,String status,String username,int taskId){
         this.setUsername(username);
         this.setStatus(status);
         this.setTask(task);
         this.setSubject(subject);
+        this.setTaskId(taskId);
     }
 public Task(){
 

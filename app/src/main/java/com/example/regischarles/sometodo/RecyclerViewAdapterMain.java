@@ -1,7 +1,6 @@
 package com.example.regischarles.sometodo;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -10,17 +9,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
 public class RecyclerViewAdapterMain extends RecyclerView.Adapter<RecyclerViewAdapterMain.RecyclerViewHolder> {
     ArrayList<Task> taskArrayList;
    private Context ctx;
+   DatabaseHelper helper;
 
-   public RecyclerViewAdapterMain(Context ctx,ArrayList<Task> tasks){
+
+   public RecyclerViewAdapterMain(Context ctx, ArrayList<Task> tasks, DatabaseHelper helper){
 this.taskArrayList=tasks;
 this.ctx=ctx;
+this.helper=helper;
    }
     @NonNull
     @Override
@@ -31,8 +32,15 @@ this.ctx=ctx;
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerViewHolder recyclerViewHolder, int position) {
-       recyclerViewHolder.textView.setText(taskArrayList.get(position).getTask());
-       recyclerViewHolder.title.setText(taskArrayList.get(position).getSubject());
+        if(!taskArrayList.get(position).getStatus().trim().equals("finished")) {
+
+            Log.v("UniqueTag"," inside Message "+taskArrayList.get(position).getStatus());
+            recyclerViewHolder.textView.setText(taskArrayList.get(position).getTask());
+            recyclerViewHolder.title.setText(taskArrayList.get(position).getSubject());
+        }
+        else{
+            Log.v("UniqueTag","Message "+taskArrayList.get(position).getStatus());
+        }
 
 
     }
@@ -42,7 +50,7 @@ this.ctx=ctx;
     public int getItemCount() {
         return taskArrayList.size();
     }
-    static  class RecyclerViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+      class RecyclerViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
        TextView textView;
        TextView title;
        Button button;
@@ -65,10 +73,24 @@ this.ctx=ctx;
         @Override
         public void onClick(View v) {
             Log.v("UniqueTag","Clciked"+getAdapterPosition());
-            Log.v("UniqueTag ","data"+tasks.get(getAdapterPosition()).getTask());
-            mContext.startActivity(new Intent(mContext,Report.class));
+            Log.v("UniqueTag ","data"+tasks.get(getAdapterPosition()).getTaskId());
+            int count=helper.updateTask(tasks.get(getAdapterPosition()).getTaskId());
+            removeItem(getAdapterPosition());
+
+            Log.v("UniqueTag","Changed"+count);
 
 
+
+
+
+
+
+        }
+        void removeItem(int position){
+
+            Task task=tasks.get(position);
+            tasks.remove(position);
+            notifyItemRemoved(position);
 
 
         }

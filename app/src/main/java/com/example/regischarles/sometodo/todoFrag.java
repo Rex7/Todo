@@ -37,7 +37,7 @@ public class  todoFrag extends Fragment  {
         sessionManage= new SessionManage(context);
         DatabaseHelper helper=new DatabaseHelper(context,null,null,4);
         getAllTask= helper.getAllRecord(sessionManage);
-        recyclerViewAdapterMain =new RecyclerViewAdapterMain(context,getAllTask);
+        recyclerViewAdapterMain =new RecyclerViewAdapterMain(context,getAllTask,helper);
     }
 
     @Nullable
@@ -74,7 +74,7 @@ public class  todoFrag extends Fragment  {
         int count=   recyclerViewAdapterMain.getItemCount();
         DatabaseHelper helper=new DatabaseHelper(context,null,null,3);
 
-       RecyclerViewAdapterMain recycler=new RecyclerViewAdapterMain(context,helper.getAllRecord(sessionManage));
+       RecyclerViewAdapterMain recycler=new RecyclerViewAdapterMain(context,helper.getAllRecord(sessionManage), helper);
        recyclerView.setAdapter(recycler);
         recycler.notifyDataSetChanged();
            Log.v("refreshDataMethod","couny "+count+"size of array "+recycler.taskArrayList.size());

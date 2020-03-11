@@ -6,21 +6,81 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+
+import java.util.ArrayList;
 
 @SuppressLint("ValidFragment")
 public class finisedFrag extends Fragment {
-Context context;
-    public finisedFrag(Context context) {
+    Context context;
+    RecyclerView recyclerView;
+    SessionManage sessionManage;
+    RecyclerViewFinishedFrag recyclerViewAdapterMain;
+    ArrayList<Task> getAllTask;
+
+    @SuppressLint("ValidFragment")
+    public finisedFrag(Context context){
         this.context=context;
+    }
+    Button button;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        sessionManage= new SessionManage(context);
+        DatabaseHelper helper=new DatabaseHelper(context,null,null,4);
+        getAllTask= helper.getAllFinishedTask(sessionManage);
+        recyclerViewAdapterMain =new RecyclerViewFinishedFrag(context,getAllTask,helper);
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.finised_layout,container,false);
+
+
+        View view= inflater.inflate(R.layout.finised_layout,container,false);
+
+
+        recyclerView=view.findViewById(R.id.recyclerView_finished);
+        recyclerView.setLayoutManager(new LinearLayoutManager(context));
+        recyclerView.setClipToPadding(true);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setAdapter(recyclerViewAdapterMain);
+
+
+
+
+
+
+
+
+
+        return  view;
     }
+    public void refreshData(){
+        Log.v("UniqueTag","RefreshData() is called");
+        try{
+            int count=   recyclerViewAdapterMain.getItemCount();
+            DatabaseHelper helper=new DatabaseHelper(context,null,null,3);
+
+            RecyclerViewAdapterMain recycler=new RecyclerViewAdapterMain(context,helper.getAllRecord(sessionManage), helper);
+            recyclerView.setAdapter(recycler);
+            recycler.notifyDataSetChanged();
+            Log.v("refreshDataMethod","couny "+count+"size of array "+recycler.taskArrayList.size());
+        }catch (Exception ex){
+            Log.v("refreshDataMethod"," "+ex.getMessage());
+        }
+
+
+
+    }
+
 
 }
